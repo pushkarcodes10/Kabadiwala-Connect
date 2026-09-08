@@ -89,6 +89,7 @@ dependencies {
     implementation(coreKtx)
     implementation(constraintLayout)
     implementation(gson)
+    implementation("com.google.mlkit:image-labeling:17.0.9")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

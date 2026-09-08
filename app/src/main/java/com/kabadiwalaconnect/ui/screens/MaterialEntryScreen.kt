@@ -1,5 +1,9 @@
 package com.kabadiwalaconnect.ui.screens
 
+import android.graphics.Bitmap
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import com.kabadiwalaconnect.ml.PhotoPriceScanner
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -126,6 +130,32 @@ fun MaterialEntryScreen(
     var selectedCategory by remember { mutableStateOf<MaterialCategory?>(null) }
     val weightText = remember { mutableStateOf(weight) }
 
+    val scope = rememberCoroutineScope()
+    val photoScanner = remember { PhotoPriceScanner() }
+    var detectedCategoryText by remember { mutableStateOf<String?>(null) }
+    var isScanningPhoto by remember { mutableStateOf(false) }
+
+    val photoLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.TakePicturePreview()
+    ) { bitmap: Bitmap? ->
+        if (bitmap != null) {
+            isScanningPhoto = true
+            scope.launch {
+                val result = photoScanner.scanPhoto(bitmap)
+                isScanningPhoto = false
+                if (result.category != null && result.price != null) {
+                    selectedCategory = result.category
+                    val matching = materials.firstOrNull { it.category == result.category }
+                    if (matching != null) {
+                        viewModel.selectMaterial(matching)
+                    }
+                    val catName = EntityTranslations.getLocalizedCategoryName(result.category, currentLanguage.code)
+                    detectedCategoryText = "Detected: $catName — tap to change"
+                }
+            }
+        }
+    }
+
     // Multi-item cart state
     val cartItems = remember {
         mutableStateListOf<ScrapCartItem>().apply {
@@ -185,11 +215,10 @@ fun MaterialEntryScreen(
                     )
                 }
 
-                // AI Photo Scanner Banner
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { onNavigate(Screen.MaterialScanner) },
+                        .clickable { photoLauncher.launch(null) },
                     colors = CardDefaults.cardColors(
                         containerColor = KabadiwalaColors.PrimaryContainer.copy(alpha = 0.7f),
                         contentColor = KabadiwalaColors.OnPrimaryContainer
@@ -209,22 +238,30 @@ fun MaterialEntryScreen(
                                 .background(KabadiwalaColors.Primary),
                             contentAlignment = Alignment.Center
                         ) {
-                            Icon(
-                                imageVector = Icons.Filled.CameraAlt,
-                                contentDescription = "Camera",
-                                tint = Color.White,
-                                modifier = Modifier.size(24.dp)
-                            )
+                            if (isScanningPhoto) {
+                                CircularProgressIndicator(
+                                    color = Color.White,
+                                    modifier = Modifier.size(22.dp),
+                                    strokeWidth = 2.dp
+                                )
+                            } else {
+                                Icon(
+                                    imageVector = Icons.Filled.CameraAlt,
+                                    contentDescription = "Camera",
+                                    tint = Color.White,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            }
                         }
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                text = localizedUi("snap_photo_title"),
+                                text = if (isScanningPhoto) "Scanning scrap photo..." else localizedUi("snap_photo_title"),
                                 style = KabadiwalaTypography.TitleSmall,
                                 fontWeight = FontWeight.Bold,
                                 color = KabadiwalaColors.Primary
                             )
                             Text(
-                                text = localizedUi("snap_photo_sub"),
+                                text = if (isScanningPhoto) "Identifying material category..." else localizedUi("snap_photo_sub"),
                                 style = KabadiwalaTypography.BodySmall,
                                 color = KabadiwalaColors.OnSurfaceVariant
                             )
@@ -306,6 +343,35 @@ fun MaterialEntryScreen(
                     MaterialCategory.OTHER to EntityTranslations.getLocalizedCategoryName(MaterialCategory.OTHER, currentLanguage.code)
                 )
 
+                if (detectedCategoryText != null) {
+                    Surface(
+                        color = KabadiwalaColors.PrimaryContainer.copy(alpha = 0.5f),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable { detectedCategoryText = null }
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                text = detectedCategoryText!!,
+                                style = KabadiwalaTypography.LabelMedium,
+                                color = KabadiwalaColors.Primary,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Icon(
+                                imageVector = Icons.Filled.Close,
+                                contentDescription = "Clear",
+                                tint = KabadiwalaColors.Primary,
+                                modifier = Modifier.size(16.dp)
+                            )
+                        }
+                    }
+                }
+
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -316,7 +382,10 @@ fun MaterialEntryScreen(
                         val isSelected = selectedCategory == cat
                         FilterChip(
                             selected = isSelected,
-                            onClick = { selectedCategory = cat },
+                            onClick = {
+                                selectedCategory = cat
+                                detectedCategoryText = null
+                            },
                             label = { Text(label, style = KabadiwalaTypography.LabelMedium) },
                             colors = FilterChipDefaults.filterChipColors(
                                 selectedContainerColor = KabadiwalaColors.PrimaryContainer,

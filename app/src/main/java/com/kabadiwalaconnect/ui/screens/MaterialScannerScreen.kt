@@ -486,13 +486,21 @@ fun MaterialScannerScreen(
                 color = KabadiwalaColors.OnSurfaceVariant
             )
             val testSamples = listOf(
-                "copper_wires_pipes" to "Copper Wires",
-                "brass_utensils_fittings" to "Brass Utensils",
-                "aluminium_cans_utensils" to "Aluminium Cans",
-                "newspapers_raddi" to "Raddi / Newspaper",
-                "pet_bottles_water_soda" to "PET Bottles",
-                "lead_batteries_inverter_vehicle" to "Inverter Battery",
-                "iron_loha_scrap" to "Iron / Loha"
+                "laptop_motherboard_green_boards" to "💻 Laptop / PC",
+                "used_smartphone_mobile_pcbs" to "📱 Smartphone",
+                "lead_batteries_inverter_vehicle" to "🔋 Inverter Battery",
+                "copper_wires_pipes" to "🔌 Copper Wires",
+                "iron_loha_scrap" to "🔩 Iron / Loha",
+                "brass_utensils_fittings" to "🟡 Brass Utensils",
+                "aluminium_cans_utensils" to "🥫 Aluminium Cans",
+                "newspapers_raddi" to "📰 Raddi / Newspaper",
+                "cardboard_carton_gutta" to "📦 Cardboard Carton",
+                "pet_bottles_water_soda" to "🧴 PET Bottles",
+                "hard_plastics_buckets_crates" to "🪣 Hard Plastic",
+                "broken_glass_ceramics" to "🍾 Broken Glass",
+                "fibre_tyres_rubber" to "🛞 Tyres / Rubber",
+                "old_clothes_textiles" to "👕 Old Clothes",
+                "composite_packaging_tetra_pak" to "🧃 Tetra Pak"
             )
             Row(
                 modifier = Modifier

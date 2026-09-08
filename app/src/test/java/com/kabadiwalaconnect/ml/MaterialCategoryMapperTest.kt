@@ -40,6 +40,28 @@ class MaterialCategoryMapperTest {
     }
 
     @Test
+    fun testLaptopWithPublicationLabelsResolvesToElectronics() {
+        val labels = listOf(
+            ImageLabel("Publication", 0.88f, 0),
+            ImageLabel("Laptop", 0.85f, 1),
+            ImageLabel("Computer", 0.82f, 2),
+            ImageLabel("Display device", 0.79f, 3)
+        )
+        assertEquals(MaterialCategory.ELECTRONICS, mapper.mapLabelsToCategory(labels))
+    }
+
+    @Test
+    fun testPetBottleWithCanDrinkwareLabelsResolvesToPlastic() {
+        val labels = listOf(
+            ImageLabel("Drinkware", 0.89f, 0),
+            ImageLabel("Can", 0.84f, 1),
+            ImageLabel("Bottle", 0.83f, 2),
+            ImageLabel("Plastic bottle", 0.81f, 3)
+        )
+        assertEquals(MaterialCategory.PLASTIC, mapper.mapLabelsToCategory(labels))
+    }
+
+    @Test
     fun testBatteryMapping() {
         val labels = listOf(
             ImageLabel("Battery", 0.92f, 0)
@@ -52,6 +74,15 @@ class MaterialCategoryMapperTest {
         val labels = listOf(
             ImageLabel("Wire", 0.82f, 0),
             ImageLabel("Cable", 0.79f, 1)
+        )
+        assertEquals(MaterialCategory.METAL, mapper.mapLabelsToCategory(labels))
+    }
+
+    @Test
+    fun testPureCanMapping() {
+        val labels = listOf(
+            ImageLabel("Aluminum can", 0.91f, 0),
+            ImageLabel("Can", 0.88f, 1)
         )
         assertEquals(MaterialCategory.METAL, mapper.mapLabelsToCategory(labels))
     }

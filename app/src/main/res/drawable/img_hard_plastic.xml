@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#FFEBEE"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- Red Household Plastic Bucket & Crate -->
+    <!-- Metal Handle Wire -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#78909C"
+        android:strokeWidth="3.5"
+        android:pathData="M30,50 C30,22 90,22 90,50"/>
+    <!-- Handle Grip -->
+    <path
+        android:fillColor="#FDD835"
+        android:pathData="M52,24 L68,24 L68,30 L52,30 Z"/>
+    <!-- Bucket Rim -->
+    <path
+        android:fillColor="#B71C1C"
+        android:pathData="M24,48 L96,48 L96,56 L24,56 Z"/>
+    <!-- Bucket Body (Tapered) -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M26,56 L94,56 L86,94 L34,94 Z"/>
+    <!-- Plastic Highlights / Molded Ribs -->
+    <path
+        android:fillColor="#EF5350"
+        android:pathData="M32,58 L42,58 L46,92 L38,92 Z"/>
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M52,58 L68,58 L66,92 L54,92 Z"/>
+    <!-- Base -->
+    <path
+        android:fillColor="#B71C1C"
+        android:pathData="M32,94 L88,94 L88,98 L32,98 Z"/>
+</vector>

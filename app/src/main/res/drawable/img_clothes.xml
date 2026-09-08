@@ -1,0 +1,38 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#EDE7F6"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- Stack of folded clothes & cotton shirt -->
+    <!-- Bottom Layer (Navy Jeans / Denim) -->
+    <path
+        android:fillColor="#1A237E"
+        android:pathData="M24,80 L96,80 C98,80 100,83 99,87 L98,92 C97,95 95,96 92,96 L28,96 C25,96 23,95 22,92 L21,87 C20,83 22,80 24,80 Z"/>
+    <path
+        android:fillColor="#283593"
+        android:pathData="M26,82 L94,82 L94,88 L26,88 Z"/>
+    <!-- Middle Layer (Green Fabric) -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M26,68 L94,68 C96,68 98,71 97,75 L96,79 C95,81 93,82 91,82 L29,82 C27,82 25,81 24,79 L23,75 C22,71 24,68 26,68 Z"/>
+    <path
+        android:fillColor="#43A047"
+        android:pathData="M28,70 L92,70 L92,75 L28,75 Z"/>
+    <!-- Top Layer (Folded Shirt - Coral/Pink) -->
+    <path
+        android:fillColor="#D81B60"
+        android:pathData="M30,42 L46,30 L74,30 L90,42 L84,54 L76,48 L76,68 L44,68 L44,48 L36,54 Z"/>
+    <!-- Collar & Buttons -->
+    <path
+        android:fillColor="#AD1457"
+        android:pathData="M48,32 L60,44 L72,32 L64,30 L60,34 L56,30 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M59,48 C60.1,48 61,48.9 61,50 C61,51.1 60.1,52 59,52 C57.9,52 57,51.1 57,50 C57,48.9 57.9,48 59,48 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M59,58 C60.1,58 61,58.9 61,60 C61,61.1 60.1,62 59,62 C57.9,62 57,61.1 57,60 C57,58.9 57.9,58 59,58 Z"/>
+</vector>

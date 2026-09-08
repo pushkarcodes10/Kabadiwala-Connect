@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#E8F5E9"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- Green Glass Bottle -->
+    <!-- Cap -->
+    <path
+        android:fillColor="#C8E6C9"
+        android:pathData="M44,22 L56,22 L56,26 L44,26 Z"/>
+    <!-- Bottle Neck -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M46,26 L54,26 L54,42 L46,42 Z"/>
+    <!-- Bottle Body -->
+    <path
+        android:fillColor="#388E3C"
+        android:pathData="M46,42 C46,50 36,54 36,64 L36,92 C36,96 40,98 50,98 C60,98 64,96 64,92 L64,64 C64,54 54,50 54,42 Z"/>
+    <!-- Glass Highlights -->
+    <path
+        android:fillColor="#A5D6A7"
+        android:pathData="M40,62 L44,62 L44,90 L40,90 Z"/>
+    <path
+        android:fillColor="#E8F5E9"
+        android:pathData="M41,66 L43,66 L43,84 L41,84 Z"/>
+    <!-- Second Amber/Brown Beer Bottle beside it -->
+    <path
+        android:fillColor="#795548"
+        android:pathData="M68,36 L76,36 L76,48 L68,48 Z"/>
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M68,48 C68,54 60,58 60,66 L60,92 C60,96 64,98 72,98 C80,98 84,96 84,92 L84,66 C84,58 76,54 76,48 Z"/>
+    <path
+        android:fillColor="#D7CCC8"
+        android:pathData="M64,66 L67,66 L67,90 L64,90 Z"/>
+</vector>

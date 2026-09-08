@@ -1,0 +1,72 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <!-- Background Circle -->
+    <path
+        android:fillColor="#FFF3E0"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- Copper Pipe base -->
+    <path
+        android:fillColor="#A0522D"
+        android:pathData="M24,78 L96,78 L96,92 L24,92 Z"/>
+    <path
+        android:fillColor="#CC703B"
+        android:pathData="M24,76 L96,76 L96,88 L24,88 Z"/>
+    <path
+        android:fillColor="#E68A53"
+        android:pathData="M24,78 L96,78 L96,82 L24,82 Z"/>
+    <!-- Copper Pipe Rim -->
+    <path
+        android:fillColor="#873A16"
+        android:pathData="M20,74 L26,74 L26,94 L20,94 Z"/>
+    <path
+        android:fillColor="#873A16"
+        android:pathData="M94,74 L100,74 L100,94 L94,94 Z"/>
+    <!-- Copper Wire Coils -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#8C4710"
+        android:strokeWidth="7"
+        android:strokeLineCap="round"
+        android:pathData="M32,68 C32,40 50,28 64,28 C80,28 92,42 90,62 C88,78 72,82 58,80"/>
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#D97434"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M32,68 C32,40 50,28 64,28 C80,28 92,42 90,62 C88,78 72,82 58,80"/>
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFB380"
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M34,60 C34,42 50,30 64,30 C76,30 88,42 87,58"/>
+    <!-- Coil 2 -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#8C4710"
+        android:strokeWidth="7"
+        android:strokeLineCap="round"
+        android:pathData="M26,62 C26,34 46,22 62,22 C78,22 96,36 96,56 C96,74 80,78 68,76"/>
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#E67E38"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M26,62 C26,34 46,22 62,22 C78,22 96,36 96,56 C96,74 80,78 68,76"/>
+    <!-- Cable strands loose -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#D97434"
+        android:strokeWidth="4"
+        android:strokeLineCap="round"
+        android:pathData="M24,62 C16,56 18,44 28,40 C36,36 44,46 52,48"/>
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#F5A062"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:pathData="M88,48 C98,42 104,50 102,64 C100,74 90,82 80,82"/>
+</vector>

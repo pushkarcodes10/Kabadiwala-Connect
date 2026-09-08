@@ -1,0 +1,41 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#EFEBE9"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- 3D Cardboard Carton Box (Gutta) -->
+    <!-- Left Face -->
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M24,56 L60,74 L60,98 L24,80 Z"/>
+    <!-- Right Face -->
+    <path
+        android:fillColor="#6D4C41"
+        android:pathData="M60,74 L96,56 L96,80 L60,98 Z"/>
+    <!-- Top Left Flap (Open) -->
+    <path
+        android:fillColor="#A1887F"
+        android:pathData="M24,56 L60,74 L60,52 L24,34 Z"/>
+    <!-- Top Right Flap (Open) -->
+    <path
+        android:fillColor="#BCAAA4"
+        android:pathData="M60,74 L96,56 L96,34 L60,52 Z"/>
+    <!-- Box Interior shadow -->
+    <path
+        android:fillColor="#4E342E"
+        android:pathData="M38,44 L60,55 L82,44 L60,33 Z"/>
+    <!-- Recycle Symbol on Cardboard Box -->
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M38,72 L44,69 L44,75 Z"/>
+    <path
+        android:fillColor="#3E2723"
+        android:pathData="M48,76 L44,79 L42,73 Z"/>
+    <!-- Packing Tape strip -->
+    <path
+        android:fillColor="#D7CCC8"
+        android:pathData="M57,52 L63,55 L63,98 L57,95 Z"/>
+</vector>

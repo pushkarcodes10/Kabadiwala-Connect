@@ -1,0 +1,40 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#FFF8E1"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- Metallized / Multilayered Chips Packet -->
+    <!-- Top Crimped Seal -->
+    <path
+        android:fillColor="#E65100"
+        android:pathData="M32,24 L88,24 L86,30 L34,30 Z"/>
+    <!-- Bag Body with 3D puffed shape -->
+    <path
+        android:fillColor="#FF9800"
+        android:pathData="M34,30 L86,30 C94,52 92,76 86,92 L34,92 C28,76 26,52 34,30 Z"/>
+    <path
+        android:fillColor="#FFA726"
+        android:pathData="M36,32 L84,32 C91,52 89,74 84,90 L36,90 C31,74 29,52 36,32 Z"/>
+    <!-- Shiny Foil Reflection Streaks -->
+    <path
+        android:fillColor="#FFE082"
+        android:pathData="M44,32 L56,32 L46,90 L36,90 Z"/>
+    <path
+        android:fillColor="#FFF9C4"
+        android:pathData="M48,34 L54,34 L46,88 L40,88 Z"/>
+    <!-- Center Graphic Badge -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M44,52 C44,46 76,46 76,52 L74,70 C74,76 46,76 46,70 Z"/>
+    <!-- Chips icon inside -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M52,56 C52,53 68,53 68,56 C68,64 52,64 52,56 Z"/>
+    <!-- Bottom Crimped Seal -->
+    <path
+        android:fillColor="#E65100"
+        android:pathData="M34,92 L86,92 L88,98 L32,98 Z"/>
+</vector>

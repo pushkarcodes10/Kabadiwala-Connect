@@ -1,0 +1,98 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#E8F5E9"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- PCB Green Substrate -->
+    <path
+        android:fillColor="#1B5E20"
+        android:pathData="M24,24 L96,24 L96,96 L24,96 Z"/>
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M26,26 L94,26 L94,94 L26,94 Z"/>
+    <!-- Golden PCB Traces -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFD54F"
+        android:strokeWidth="1.5"
+        android:pathData="M30,30 L45,30 L45,45 L60,45"/>
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFD54F"
+        android:strokeWidth="1.5"
+        android:pathData="M90,30 L75,30 L75,42"/>
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFD54F"
+        android:strokeWidth="1.5"
+        android:pathData="M30,90 L40,90 L45,80 L45,65"/>
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFD54F"
+        android:strokeWidth="1.5"
+        android:pathData="M90,90 L80,90 L75,75 L65,75"/>
+    <!-- Main IC Chip (Center) -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M48,48 L72,48 L72,72 L48,72 Z"/>
+    <!-- Chip Silver Pins -->
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M52,44 L56,44 L56,48 L52,48 Z"/>
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M64,44 L68,44 L68,48 L64,48 Z"/>
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M52,72 L56,72 L56,76 L52,76 Z"/>
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M64,72 L68,72 L68,76 L64,76 Z"/>
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M44,54 L48,54 L48,58 L44,58 Z"/>
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M44,62 L48,62 L48,66 L44,66 Z"/>
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M72,54 L76,54 L76,58 L72,58 Z"/>
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M72,62 L76,62 L76,66 L72,66 Z"/>
+    <!-- Cylindrical Electrolytic Capacitors -->
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M32,36 C32,32 40,32 40,36 L40,46 C40,50 32,50 32,46 Z"/>
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M32,36 C32,34 40,34 40,36 L40,38 L32,38 Z"/>
+    <!-- Gold Contact Edge Fingers (RAM/PCIe style) -->
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M32,92 L36,92 L36,96 L32,96 Z"/>
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M40,92 L44,92 L44,96 L40,96 Z"/>
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M48,92 L52,92 L52,96 L48,96 Z"/>
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M56,92 L60,92 L60,96 L56,96 Z"/>
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M64,92 L68,92 L68,96 L64,96 Z"/>
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M72,92 L76,92 L76,96 L72,96 Z"/>
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M80,92 L84,92 L84,96 L80,96 Z"/>
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M88,92 L92,92 L92,96 L88,96 Z"/>
+</vector>

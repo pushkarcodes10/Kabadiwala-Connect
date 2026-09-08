@@ -1,0 +1,60 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#FFEBEE"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- Heavy 12V Inverter / Car Battery -->
+    <!-- Terminals -->
+    <!-- Positive (+) Red Terminal -->
+    <path
+        android:fillColor="#C62828"
+        android:pathData="M34,34 L46,34 L46,42 L34,42 Z"/>
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M32,42 L48,42 L48,46 L32,46 Z"/>
+    <!-- Negative (-) Black Terminal -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M74,34 L86,34 L86,42 L74,42 Z"/>
+    <path
+        android:fillColor="#424242"
+        android:pathData="M72,42 L88,42 L88,46 L72,46 Z"/>
+    <!-- Battery Top Lid -->
+    <path
+        android:fillColor="#37474F"
+        android:pathData="M24,46 L96,46 L96,54 L24,54 Z"/>
+    <!-- Inspection Caps on top -->
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M52,44 L58,44 L58,48 L52,48 Z"/>
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M62,44 L68,44 L68,48 L62,48 Z"/>
+    <!-- Battery Casing (Main Body) -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M26,54 L94,54 L94,94 L26,94 Z"/>
+    <!-- Battery Brand/Level Graphic -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M32,60 L88,60 L88,78 L32,78 Z"/>
+    <!-- Voltage and Plus Icon on casing -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M38,66 L44,66 L44,72 L38,72 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M52,65 L78,65 L78,68 L52,68 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M52,71 L72,71 L72,74 L52,74 Z"/>
+    <!-- Handle -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#78909C"
+        android:strokeWidth="3.5"
+        android:pathData="M26,50 C26,26 94,26 94,50"/>
+</vector>

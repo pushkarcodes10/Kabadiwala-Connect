@@ -1,0 +1,47 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#E0F2F1"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- Smartphone Mainboard (L-shaped blue/green board) -->
+    <path
+        android:fillColor="#004D40"
+        android:pathData="M32,24 L88,24 L88,58 L62,58 L62,96 L32,96 Z"/>
+    <path
+        android:fillColor="#00695C"
+        android:pathData="M34,26 L86,26 L86,56 L60,56 L60,94 L34,94 Z"/>
+    <!-- Camera Sensor Module (Silver metal ring & dark lens) -->
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M40,32 L56,32 L56,48 L40,48 Z"/>
+    <path
+        android:fillColor="#212121"
+        android:pathData="M42,34 L54,34 L54,46 L42,46 Z"/>
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M45,37 C45,35 51,35 51,37 C51,43 45,43 45,37 Z"/>
+    <!-- Processor Shield Can (Silver square) -->
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M62,32 L82,32 L82,50 L62,50 Z"/>
+    <path
+        android:fillColor="#B0BEC5"
+        android:pathData="M65,35 L79,35 L79,47 L65,47 Z"/>
+    <!-- Gold Battery & Flex Connectors -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M38,62 L54,62 L54,72 L38,72 Z"/>
+    <path
+        android:fillColor="#212121"
+        android:pathData="M40,64 L52,64 L52,70 L40,70 Z"/>
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M38,80 L54,80 L54,88 L38,88 Z"/>
+    <!-- SIM / Memory Card Slot Frame -->
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M42,82 L50,82 L50,86 L42,86 Z"/>
+</vector>

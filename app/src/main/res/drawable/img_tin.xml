@@ -1,0 +1,44 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- 15L Square Cooking Oil Tin (Classic Mandi Scrap) -->
+    <!-- Handle -->
+    <path
+        android:fillColor="#546E7A"
+        android:pathData="M50,22 L70,22 L70,30 L50,30 Z"/>
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M54,26 L66,26 L66,30 L54,30 Z"/>
+    <!-- Pouring Spout Cap -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M78,26 L88,26 L88,32 L78,32 Z"/>
+    <!-- Tin Top Plate -->
+    <path
+        android:fillColor="#B0BEC5"
+        android:pathData="M30,30 L90,30 L90,38 L30,38 Z"/>
+    <!-- Main Tin Body -->
+    <path
+        android:fillColor="#90A4AE"
+        android:pathData="M30,38 L90,38 L90,92 L30,92 Z"/>
+    <!-- Metallic Highlights -->
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M34,40 L44,40 L44,90 L34,90 Z"/>
+    <!-- Diamond Emboss on Tin Face -->
+    <path
+        android:fillColor="#78909C"
+        android:pathData="M60,46 L76,64 L60,82 L44,64 Z"/>
+    <path
+        android:fillColor="#90A4AE"
+        android:pathData="M60,50 L72,64 L60,78 L48,64 Z"/>
+    <!-- Bottom Rim -->
+    <path
+        android:fillColor="#546E7A"
+        android:pathData="M28,92 L92,92 L92,96 L28,96 Z"/>
+</vector>

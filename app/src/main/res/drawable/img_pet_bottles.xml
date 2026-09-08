@@ -1,0 +1,40 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#E1F5FE"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- PET Plastic Bottle 1 (Front Blue) -->
+    <!-- Cap -->
+    <path
+        android:fillColor="#0288D1"
+        android:pathData="M52,22 L68,22 L68,28 L52,28 Z"/>
+    <!-- Bottle Neck -->
+    <path
+        android:fillColor="#81D4FA"
+        android:pathData="M54,28 L66,28 L66,36 L54,36 Z"/>
+    <!-- Shoulder & Body -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="M54,36 C54,42 42,48 42,56 L42,88 C42,94 48,98 60,98 C72,98 78,94 78,88 L78,56 C78,48 66,42 66,36 Z"/>
+    <!-- Label -->
+    <path
+        android:fillColor="#0288D1"
+        android:pathData="M42,60 L78,60 L78,74 L42,74 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M46,65 L74,65 L74,69 L46,69 Z"/>
+    <!-- Water/Light Highlight -->
+    <path
+        android:fillColor="#E1F5FE"
+        android:pathData="M46,54 L52,54 L52,86 L46,86 Z"/>
+    <!-- Second Bottle (Tilted / Crushed in background) -->
+    <path
+        android:fillColor="#80DEEA"
+        android:pathData="M78,48 L94,36 L100,44 L86,92 L74,86 Z"/>
+    <path
+        android:fillColor="#00838F"
+        android:pathData="M92,34 L98,30 L102,35 L96,39 Z"/>
+</vector>

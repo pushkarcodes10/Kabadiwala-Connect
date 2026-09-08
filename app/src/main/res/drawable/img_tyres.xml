@@ -1,0 +1,49 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#ECEFF1"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- Black Rubber Tyre Outer Body -->
+    <path
+        android:fillColor="#212121"
+        android:pathData="M60,20 C82,20 100,38 100,60 C100,82 82,100 60,100 C38,100 20,82 20,60 C20,38 38,20 60,20 Z"/>
+    <!-- Deep Tread Grooves along perimeter -->
+    <path
+        android:fillColor="#424242"
+        android:pathData="M56,18 L64,18 L64,24 L56,24 Z"/>
+    <path
+        android:fillColor="#424242"
+        android:pathData="M56,96 L64,96 L64,102 L56,102 Z"/>
+    <path
+        android:fillColor="#424242"
+        android:pathData="M18,56 L24,56 L24,64 L18,64 Z"/>
+    <path
+        android:fillColor="#424242"
+        android:pathData="M96,56 L102,56 L102,64 L96,64 Z"/>
+    <path
+        android:fillColor="#424242"
+        android:pathData="M30,30 L36,34 L33,39 L27,35 Z"/>
+    <path
+        android:fillColor="#424242"
+        android:pathData="M84,84 L90,88 L87,93 L81,89 Z"/>
+    <path
+        android:fillColor="#424242"
+        android:pathData="M84,36 L90,30 L93,35 L87,41 Z"/>
+    <path
+        android:fillColor="#424242"
+        android:pathData="M30,84 L36,88 L33,93 L27,89 Z"/>
+    <!-- Inner Rim / Wheel Hub -->
+    <path
+        android:fillColor="#616161"
+        android:pathData="M60,36 C73.2,36 84,46.8 84,60 C84,73.2 73.2,84 60,84 C46.8,84 36,73.2 36,60 C36,46.8 46.8,36 60,36 Z"/>
+    <path
+        android:fillColor="#CFD8DC"
+        android:pathData="M60,44 C68.8,44 76,51.2 76,60 C76,68.8 68.8,76 60,76 C51.2,76 44,68.8 44,60 C44,51.2 51.2,44 60,44 Z"/>
+    <!-- Center Axle Hole -->
+    <path
+        android:fillColor="#263238"
+        android:pathData="M60,54 C63.3,54 66,56.7 66,60 C66,63.3 63.3,66 60,66 C56.7,66 54,63.3 54,60 C54,56.7 56.7,54 60,54 Z"/>
+</vector>

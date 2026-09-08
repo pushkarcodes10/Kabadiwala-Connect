@@ -1,0 +1,49 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#E3F2FD"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- Stack of Books & Notebooks -->
+    <!-- Bottom Book (Blue Spine) -->
+    <path
+        android:fillColor="#1565C0"
+        android:pathData="M24,78 L96,78 L96,92 L24,92 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M34,80 L96,80 L96,90 L34,90 Z"/>
+    <!-- Page lines -->
+    <path
+        android:fillColor="#B0BEC5"
+        android:pathData="M94,80 L96,80 L96,90 L94,90 Z"/>
+    <!-- Middle Book (Green Spine) -->
+    <path
+        android:fillColor="#2E7D32"
+        android:pathData="M26,62 L94,62 L94,76 L26,76 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,64 L94,64 L94,74 L36,74 Z"/>
+    <!-- Top Open Notebook (White Paper) -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M28,44 L92,44 L92,60 L28,60 Z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M38,46 L92,46 L92,58 L38,58 Z"/>
+    <!-- Ruled Paper lines on top open page -->
+    <path
+        android:fillColor="#90CAF9"
+        android:pathData="M44,50 L86,50 L86,51.5 L44,51.5 Z"/>
+    <path
+        android:fillColor="#90CAF9"
+        android:pathData="M44,54 L86,54 L86,55.5 L44,55.5 Z"/>
+    <!-- Pencil / Pen across books -->
+    <path
+        android:fillColor="#FDD835"
+        android:pathData="M20,40 L70,24 L72,30 L22,46 Z"/>
+    <path
+        android:fillColor="#212121"
+        android:pathData="M16,41 L20,40 L22,46 L16,45 Z"/>
+</vector>

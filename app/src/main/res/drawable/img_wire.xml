@@ -1,0 +1,58 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#FFF3E0"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- Multi-colored PVC Insulated Copper Electrical Wires -->
+    <!-- Red Wire Loop -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#C62828"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:pathData="M24,70 C24,36 48,24 64,24 C82,24 96,40 94,62 C92,80 72,88 56,84"/>
+    <!-- Yellow Wire Loop -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FBC02D"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:pathData="M30,76 C30,44 52,32 68,32 C86,32 98,46 96,68 C94,84 76,92 62,88"/>
+    <!-- Blue Wire Loop -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#1565C0"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:pathData="M20,60 C20,30 42,18 60,18 C78,18 92,30 92,52 C92,70 78,80 66,76"/>
+    <!-- Stripped Tips revealing shiny Copper strands -->
+    <!-- Red wire stripped end -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#E67E38"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M24,70 L20,84 L16,92"/>
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFAB76"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M20,84 L16,92"/>
+    <!-- Yellow wire stripped end -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#E67E38"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M62,88 L68,98 L76,104"/>
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFAB76"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M68,98 L76,104"/>
+</vector>

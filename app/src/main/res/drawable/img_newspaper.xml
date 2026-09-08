@@ -1,0 +1,51 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    <path
+        android:fillColor="#F5F5F5"
+        android:pathData="M60,6 C89.8,6 114,30.2 114,60 C114,89.8 89.8,114 60,114 C30.2,114 6,89.8 6,60 C6,30.2 30.2,6 60,6 Z"/>
+    <!-- Stack of Newspapers (Raddi) -->
+    <!-- Bottom Layers -->
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M24,84 L96,84 L96,94 L24,94 Z"/>
+    <path
+        android:fillColor="#E0E0E0"
+        android:pathData="M22,76 L94,76 L94,86 L22,86 Z"/>
+    <path
+        android:fillColor="#BDBDBD"
+        android:pathData="M25,68 L97,68 L97,78 L25,78 Z"/>
+    <path
+        android:fillColor="#EEEEEE"
+        android:pathData="M20,58 L94,58 L94,70 L20,70 Z"/>
+    <!-- Top Newspaper Folded -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M22,34 L96,34 L94,62 L20,62 Z"/>
+    <!-- Newspaper Headline & Text Lines -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M28,40 L60,40 L60,45 L28,45 Z"/>
+    <path
+        android:fillColor="#424242"
+        android:pathData="M28,48 L56,48 L56,51 L28,51 Z"/>
+    <path
+        android:fillColor="#757575"
+        android:pathData="M28,53 L54,53 L54,55 L28,55 Z"/>
+    <path
+        android:fillColor="#757575"
+        android:pathData="M28,57 L50,57 L50,59 L28,59 Z"/>
+    <!-- Newspaper Photo Box -->
+    <path
+        android:fillColor="#9E9E9E"
+        android:pathData="M66,40 L90,40 L90,56 L66,56 Z"/>
+    <!-- Tied Jute String / Twine -->
+    <path
+        android:fillColor="#A1887F"
+        android:pathData="M54,32 L60,32 L60,96 L54,96 Z"/>
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M56,32 L58,32 L58,96 L56,96 Z"/>
+</vector>

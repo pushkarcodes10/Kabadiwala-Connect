@@ -67,5 +67,13 @@ object PendingPickupStore {
         pendingCartItems = emptyList()
     }
 
+    val dominantCategory: MaterialCategory?
+        get() {
+            val firstCartCategory = pendingCartItems.firstOrNull()?.material?.category
+            if (firstCartCategory != null) return firstCartCategory
+            val singleMatId = pendingPickup?.materialId ?: return null
+            return Material.getById(singleMatId)?.category
+        }
+
     fun hasPending(): Boolean = pendingPickup != null || pendingCartItems.isNotEmpty()
 }

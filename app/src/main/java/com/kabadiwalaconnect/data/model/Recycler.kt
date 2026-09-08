@@ -22,7 +22,8 @@ data class Recycler(
     val paymentModes: List<String> = listOf("Cash on Spot", "Instant UPI"),
     val minPickupKg: Double = 10.0,
     val facilityType: String = "Authorized Mandi Yard",
-    val isOpenNow: Boolean = true
+    val isOpenNow: Boolean = true,
+    val primaryCategory: MaterialCategory? = null
 ) {
     val formattedDistance: String
         get() = if (distanceKm < 1) {
@@ -33,6 +34,19 @@ data class Recycler(
 
     val formattedRating: String
         get() = "%.1f".format(rating)
+
+    val dedicatedCategory: MaterialCategory?
+        get() = primaryCategory ?: acceptedMaterials.firstNotNullOfOrNull { Material.getById(it)?.category }
+
+    fun acceptsCategory(category: MaterialCategory): Boolean {
+        if (category == MaterialCategory.ALL) return true
+        if (primaryCategory != null) {
+            return primaryCategory == category
+        }
+        return acceptedMaterials.any { matId ->
+            Material.getById(matId)?.category == category
+        }
+    }
 }
 
 @Serializable

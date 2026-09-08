@@ -780,23 +780,29 @@ object EntityTranslations {
     /**
      * Resolves localized name for a scrap dealer / recycler.
      */
-    fun getLocalizedRecyclerName(recyclerId: String, langCode: String): String {
-        val dict = RECYCLER_TRANSLATIONS[recyclerId] ?: return "Recycler Yard"
-        return dict[langCode] 
-            ?: dict["hi"]?.takeIf { isHindiDialect(langCode) }
-            ?: dict["en"] 
-            ?: "Recycler Yard"
+    fun getLocalizedRecyclerName(recyclerId: String, langCode: String, fallbackName: String? = null): String {
+        val dict = RECYCLER_TRANSLATIONS[recyclerId]
+        if (dict != null) {
+            val translated = dict[langCode] 
+                ?: dict["hi"]?.takeIf { isHindiDialect(langCode) }
+                ?: dict["en"]
+            if (!translated.isNullOrBlank()) return translated
+        }
+        return fallbackName ?: "Recycler Yard"
     }
 
     /**
      * Resolves localized facility description for a recycler.
      */
-    fun getLocalizedFacilityType(recyclerId: String, langCode: String): String {
-        val dict = FACILITY_TRANSLATIONS[recyclerId] ?: return "Certified Scrap Yard"
-        return dict[langCode]
-            ?: dict["hi"]?.takeIf { isHindiDialect(langCode) }
-            ?: dict["en"]
-            ?: "Certified Scrap Yard"
+    fun getLocalizedFacilityType(recyclerId: String, langCode: String, fallbackType: String? = null): String {
+        val dict = FACILITY_TRANSLATIONS[recyclerId]
+        if (dict != null) {
+            val translated = dict[langCode]
+                ?: dict["hi"]?.takeIf { isHindiDialect(langCode) }
+                ?: dict["en"]
+            if (!translated.isNullOrBlank()) return translated
+        }
+        return fallbackType ?: "Certified Scrap Yard"
     }
 
     /**
@@ -866,7 +872,7 @@ val Material.localizedName: String
 
 val Recycler.localizedName: String
     @Composable
-    get() = EntityTranslations.getLocalizedRecyclerName(this.id, LocalCurrentLanguage.current.code)
+    get() = EntityTranslations.getLocalizedRecyclerName(this.id, LocalCurrentLanguage.current.code, this.name)
 
 val MaterialCategory.localizedName: String
     @Composable
@@ -874,7 +880,7 @@ val MaterialCategory.localizedName: String
 
 val Recycler.localizedFacilityType: String
     @Composable
-    get() = EntityTranslations.getLocalizedFacilityType(this.id, LocalCurrentLanguage.current.code)
+    get() = EntityTranslations.getLocalizedFacilityType(this.id, LocalCurrentLanguage.current.code, this.facilityType)
 
 val MarketPrice.localizedMaterialName: String
     @Composable

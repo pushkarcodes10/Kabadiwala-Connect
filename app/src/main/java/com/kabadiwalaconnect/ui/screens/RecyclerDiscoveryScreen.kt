@@ -63,6 +63,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import com.kabadiwalaconnect.KabadiwalaApplication
 import com.kabadiwalaconnect.data.model.Material
+import com.kabadiwalaconnect.data.model.MaterialCategory
 import com.kabadiwalaconnect.data.model.PaymentMethod
 import com.kabadiwalaconnect.data.model.PendingPickupStore
 import com.kabadiwalaconnect.data.model.ScrapCartItem
@@ -151,7 +152,8 @@ enum class RecyclerDiscoveryTab {
 fun RecyclerDiscoveryScreen(
     onNavigate: (Screen) -> Unit,
     viewModel: RecyclerDiscoveryViewModel = viewModel(factory = viewModelFactory()),
-    languageViewModel: LanguageViewModel = viewModel(factory = viewModelFactory())
+    languageViewModel: LanguageViewModel = viewModel(factory = viewModelFactory()),
+    initialCategory: MaterialCategory? = null
 ) {
     val strings = currentStrings()
     val currentLanguage by languageViewModel.currentLanguage.collectAsState()
@@ -161,7 +163,16 @@ fun RecyclerDiscoveryScreen(
     val isSearching by viewModel.isSearching.collectAsStateWithLifecycle()
     val searchQuery by viewModel.searchQuery.collectAsStateWithLifecycle()
     val selectedFilter by viewModel.selectedFilter.collectAsStateWithLifecycle()
+    val selectedCategory by viewModel.selectedCategory.collectAsStateWithLifecycle()
     val error by viewModel.error.collectAsStateWithLifecycle()
+
+    androidx.compose.runtime.LaunchedEffect(initialCategory) {
+        if (initialCategory != null) {
+            viewModel.selectCategory(initialCategory)
+        } else if (PendingPickupStore.dominantCategory != null && viewModel.selectedCategory.value == null) {
+            viewModel.selectCategory(PendingPickupStore.dominantCategory)
+        }
+    }
 
     var selectedTab by remember { mutableStateOf(RecyclerDiscoveryTab.LIST) }
     var searchText by remember { mutableStateOf(searchQuery) }
@@ -263,10 +274,10 @@ fun RecyclerDiscoveryScreen(
     }
 
     // Filter recyclers locally for fast responsive feedback
-    val filteredRecyclers = remember(recyclers, selectedFilter, maxDistanceKm, searchText) {
+    val filteredRecyclers = remember(recyclers, selectedCategory, maxDistanceKm, searchText) {
         recyclers.filter { r ->
             (maxDistanceKm >= 10.0 || r.distanceKm <= maxDistanceKm) &&
-            (selectedFilter == null || r.acceptedMaterials.any { it.contains(selectedFilter!!, ignoreCase = true) }) &&
+            (selectedCategory == null || selectedCategory == MaterialCategory.ALL || r.acceptsCategory(selectedCategory!!)) &&
             (searchText.isBlank() || r.name.contains(searchText, ignoreCase = true) ||
                     r.address.contains(searchText, ignoreCase = true) ||
                     r.contactPerson.contains(searchText, ignoreCase = true))
@@ -400,7 +411,54 @@ fun RecyclerDiscoveryScreen(
                 }
             }
 
-            // Material Filter Chips
+            // Dedicated Waste Category Selector Bar (Always visible & prominent)
+            WasteCategoryFilterChips(
+                selectedCategory = selectedCategory,
+                onCategoryChange = { cat -> viewModel.selectCategory(cat) }
+            )
+
+            // Active Category Filter Notification Banner
+            if (selectedCategory != null && selectedCategory != MaterialCategory.ALL) {
+                Surface(
+                    shape = RoundedCornerShape(10.dp),
+                    color = KabadiwalaColors.PrimaryContainer.copy(alpha = 0.55f),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, KabadiwalaColors.Primary.copy(alpha = 0.35f)),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 12.dp, vertical = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp),
+                            modifier = Modifier.weight(1f)
+                        ) {
+                            Text("🎯", style = KabadiwalaTypography.BodyMedium)
+                            Text(
+                                text = "Showing dedicated ${selectedCategory?.localizedName} buyers (${filteredRecyclers.size} verified)",
+                                style = KabadiwalaTypography.LabelMedium,
+                                fontWeight = FontWeight.SemiBold,
+                                color = KabadiwalaColors.Primary
+                            )
+                        }
+                        Text(
+                            text = "Clear ✕",
+                            style = KabadiwalaTypography.LabelSmall,
+                            fontWeight = FontWeight.Bold,
+                            color = KabadiwalaColors.Primary,
+                            modifier = Modifier
+                                .clickable { viewModel.selectCategory(null) }
+                                .padding(horizontal = 6.dp, vertical = 2.dp)
+                        )
+                    }
+                }
+            }
+
+            // Material Filter Chips (when Tune filter is clicked)
             if (showFilters) {
                 MaterialFilterChips(
                     selectedFilter = selectedFilter,
@@ -664,6 +722,7 @@ fun RecyclerDiscoveryScreen(
                             onAction = {
                                 searchText = ""
                                 maxDistanceKm = 10.0
+                                viewModel.selectCategory(null)
                                 viewModel.filterByMaterial(null)
                                 viewModel.refresh()
                             },
@@ -1600,6 +1659,54 @@ private fun MiniMapBackground() {
         drawCircle(Color(0xFF2E7D32), radius = 6f, center = Offset(w * 0.33f, h * 0.38f))
         drawCircle(Color(0xFFFF8F00), radius = 5f, center = Offset(w * 0.65f, h * 0.65f))
         drawCircle(Color(0xFF2E7D32), radius = 5f, center = Offset(w * 0.8f, h * 0.3f))
+    }
+}
+
+@Composable
+fun WasteCategoryFilterChips(
+    selectedCategory: MaterialCategory?,
+    onCategoryChange: (MaterialCategory?) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val categories = listOf(
+        null to ("🌐 " + localizedUi("all_materials")),
+        MaterialCategory.ELECTRONICS to ("⚡ " + MaterialCategory.ELECTRONICS.localizedName),
+        MaterialCategory.METAL to ("🔩 " + MaterialCategory.METAL.localizedName),
+        MaterialCategory.PAPER to ("📰 " + MaterialCategory.PAPER.localizedName),
+        MaterialCategory.PLASTIC to ("🧴 " + MaterialCategory.PLASTIC.localizedName),
+        MaterialCategory.GLASS to ("🍾 " + MaterialCategory.GLASS.localizedName),
+        MaterialCategory.TEXTILE to ("👕 " + MaterialCategory.TEXTILE.localizedName),
+        MaterialCategory.RUBBER to ("🛞 " + MaterialCategory.RUBBER.localizedName),
+        MaterialCategory.OTHER to ("📦 " + MaterialCategory.OTHER.localizedName)
+    )
+
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState()),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        categories.forEach { (cat, label) ->
+            val isSelected = (selectedCategory == null && cat == null) || (selectedCategory == cat && cat != null)
+            FilterChip(
+                selected = isSelected,
+                onClick = {
+                    onCategoryChange(if (cat == null) null else if (selectedCategory == cat) null else cat)
+                },
+                label = {
+                    Text(
+                        text = label,
+                        style = KabadiwalaTypography.LabelMedium,
+                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium
+                    )
+                },
+                colors = FilterChipDefaults.filterChipColors(
+                    selectedContainerColor = KabadiwalaColors.Primary,
+                    selectedLabelColor = Color.White
+                )
+            )
+        }
     }
 }
 

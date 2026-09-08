@@ -2,6 +2,7 @@ package com.kabadiwalaconnect.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kabadiwalaconnect.data.model.MaterialCategory
 import com.kabadiwalaconnect.data.model.Recycler
 import com.kabadiwalaconnect.data.model.RecyclerSearchResult
 import com.kabadiwalaconnect.data.repository.KabadiwalaRepository
@@ -27,6 +28,9 @@ class RecyclerDiscoveryViewModel(private val repository: KabadiwalaRepository) :
     private val _selectedFilter = MutableStateFlow<String?>(null)
     val selectedFilter: StateFlow<String?> = _selectedFilter
 
+    private val _selectedCategory = MutableStateFlow<MaterialCategory?>(null)
+    val selectedCategory: StateFlow<MaterialCategory?> = _selectedCategory
+
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error
 
@@ -43,7 +47,13 @@ class RecyclerDiscoveryViewModel(private val repository: KabadiwalaRepository) :
         viewModelScope.launch {
             _isSearching.value = true
             _error.value = null
-            repository.searchRecyclers(_searchQuery.value, defaultLat, defaultLng, defaultRadius)
+            repository.searchRecyclers(
+                _searchQuery.value,
+                defaultLat,
+                defaultLng,
+                defaultRadius,
+                _selectedCategory.value
+            )
                 .onSuccess { result: RecyclerSearchResult ->
                     _recyclers.value = result.recyclers
                     _isSearching.value = false
@@ -56,6 +66,11 @@ class RecyclerDiscoveryViewModel(private val repository: KabadiwalaRepository) :
 
     fun updateSearchQuery(query: String) {
         _searchQuery.value = query
+        searchRecyclers()
+    }
+
+    fun selectCategory(category: MaterialCategory?) {
+        _selectedCategory.value = category
         searchRecyclers()
     }
 

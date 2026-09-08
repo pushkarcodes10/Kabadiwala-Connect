@@ -1,5 +1,6 @@
 package com.kabadiwalaconnect.ui.components
 
+import com.kabadiwalaconnect.data.model.MaterialCategory
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -463,6 +464,34 @@ fun RecyclerCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
+            // Dedicated Category Badge
+            recycler.dedicatedCategory?.let { category ->
+                val (badgeText, badgeBg, badgeTextColor) = when (category) {
+                    MaterialCategory.ELECTRONICS -> Triple("⚡ Dedicated E-Waste Recycler", Color(0xFFE8F5E9), Color(0xFF1B5E20))
+                    MaterialCategory.METAL -> Triple("🔩 Dedicated Metal Scrap Buyer", Color(0xFFFFF3E0), Color(0xFFE65100))
+                    MaterialCategory.PAPER -> Triple("📰 Dedicated Paper & Raddi Depot", Color(0xFFE3F2FD), Color(0xFF0D47A1))
+                    MaterialCategory.PLASTIC -> Triple("🧴 Dedicated Plastic Processing Yard", Color(0xFFEDE7F6), Color(0xFF4A148C))
+                    MaterialCategory.GLASS -> Triple("🍾 Dedicated Glass & Cullet Buyer", Color(0xFFE0F7FA), Color(0xFF006064))
+                    MaterialCategory.TEXTILE -> Triple("👕 Dedicated Textile & Fabric Recycler", Color(0xFFFCE4EC), Color(0xFF880E4F))
+                    MaterialCategory.RUBBER -> Triple("🛞 Dedicated Rubber & Tyre Reclaimer", Color(0xFFEFEBE9), Color(0xFF3E2723))
+                    MaterialCategory.OTHER -> Triple("📦 Dedicated Refuse & Multi-Scrap Hub", Color(0xFFF1F8E9), Color(0xFF33691E))
+                    else -> Triple("♻️ Certified Scrap Recycler", Color(0xFFE8F5E9), Color(0xFF2E7D32))
+                }
+                Surface(
+                    shape = RoundedCornerShape(6.dp),
+                    color = badgeBg,
+                    modifier = Modifier.padding(bottom = 6.dp)
+                ) {
+                    Text(
+                        text = badgeText,
+                        style = KabadiwalaTypography.LabelSmall,
+                        fontWeight = FontWeight.Bold,
+                        color = badgeTextColor,
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
+                    )
+                }
+            }
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween

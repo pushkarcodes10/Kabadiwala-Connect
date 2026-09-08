@@ -81,12 +81,22 @@ class KabadiwalaRepositoryImpl : KabadiwalaRepository {
         Result.Success(_marketPrices.value.find { it.materialId == materialId })
     }
 
-    override suspend fun searchRecyclers(query: String, lat: Double, lng: Double, radiusKm: Double): Result<RecyclerSearchResult> = withContext(Dispatchers.IO) {
-        delay(500.milliseconds)
+    override suspend fun searchRecyclers(
+        query: String,
+        lat: Double,
+        lng: Double,
+        radiusKm: Double,
+        category: MaterialCategory?
+    ): Result<RecyclerSearchResult> = withContext(Dispatchers.IO) {
+        delay(300.milliseconds)
         val filtered = _nearbyRecyclers.value.filter { recycler ->
-            (query.isBlank() || recycler.name.contains(query, ignoreCase = true) ||
-                    recycler.address.contains(query, ignoreCase = true)) &&
-                    recycler.distanceKm <= radiusKm
+            val matchesQuery = query.isBlank() ||
+                    recycler.name.contains(query, ignoreCase = true) ||
+                    recycler.address.contains(query, ignoreCase = true) ||
+                    recycler.contactPerson.contains(query, ignoreCase = true)
+            val matchesRadius = recycler.distanceKm <= radiusKm
+            val matchesCategory = category == null || category == MaterialCategory.ALL || recycler.acceptsCategory(category)
+            matchesQuery && matchesRadius && matchesCategory
         }.sortedBy { it.distanceKm }
         Result.Success(RecyclerSearchResult(filtered, filtered.size, radiusKm))
     }
@@ -242,54 +252,15 @@ class KabadiwalaRepositoryImpl : KabadiwalaRepository {
                 longitude = 77.5920,
                 rating = 4.9f,
                 reviewCount = 192,
-                acceptedMaterials = listOf("copper_wires_pipes", "brass_utensils_fittings", "aluminium_cans_utensils", "iron_loha_scrap", "lead_batteries_inverter_vehicle"),
+                acceptedMaterials = listOf("copper_wires_pipes", "brass_utensils_fittings", "aluminium_cans_utensils", "iron_loha_scrap", "heavy_copper_cable_scrap", "tin_metal_cans"),
                 workingHours = "8:00 AM - 8:30 PM",
                 isVerified = true,
                 distanceKm = 0.8,
                 paymentModes = listOf("Cash on Spot", "Instant UPI", "IMPS"),
                 minPickupKg = 10.0,
                 facilityType = "Wholesale Mandi Yard • Certified Weighbridge",
-                isOpenNow = true
-            ),
-            Recycler(
-                id = "recycler_bengaluru_eco",
-                name = "Bengaluru Eco Scrap & Raddi Mart",
-                address = "5th Cross, 17th Main, Sector 4, HSR Layout, Bangalore",
-                phone = "+91 94481 23456",
-                whatsappNumber = "+919448123456",
-                contactPerson = "Venkatesh Murthy",
-                latitude = 12.9650,
-                longitude = 77.6010,
-                rating = 4.8f,
-                reviewCount = 248,
-                acceptedMaterials = listOf("newspapers_raddi", "cardboard_carton_gutta", "pet_bottles_water_soda", "books_white_paper", "hdpe_containers"),
-                workingHours = "7:30 AM - 8:00 PM",
-                isVerified = true,
-                distanceKm = 1.4,
-                paymentModes = listOf("Instant UPI", "Cash"),
-                minPickupKg = 5.0,
-                facilityType = "Doorstep Pickup Van • Daily Spot Payout",
-                isOpenNow = true
-            ),
-            Recycler(
-                id = "recycler_delhi_ncr_battery",
-                name = "NCR Battery & Heavy Loha Hub",
-                address = "B-12, Phase II Scrap Market, Mayapuri, New Delhi",
-                phone = "+91 98991 87654",
-                whatsappNumber = "+919899187654",
-                contactPerson = "Imran Khan & Sons",
-                latitude = 12.9820,
-                longitude = 77.6100,
-                rating = 4.7f,
-                reviewCount = 165,
-                acceptedMaterials = listOf("lead_batteries_inverter_vehicle", "lead_battery_plates", "iron_loha_scrap", "cast_iron_scrap", "stainless_steel_scrap"),
-                workingHours = "9:00 AM - 7:30 PM",
-                isVerified = true,
-                distanceKm = 2.1,
-                paymentModes = listOf("Immediate Bank Transfer", "UPI", "Cash"),
-                minPickupKg = 25.0,
-                facilityType = "Heavy Metal Yard • Certified Pollution License",
-                isOpenNow = true
+                isOpenNow = true,
+                primaryCategory = MaterialCategory.METAL
             ),
             Recycler(
                 id = "recycler_gupta_copper",
@@ -309,7 +280,29 @@ class KabadiwalaRepositoryImpl : KabadiwalaRepository {
                 paymentModes = listOf("Cash on Spot", "UPI"),
                 minPickupKg = 5.0,
                 facilityType = "Copper Spectrometer On-Site • Premium Rates",
-                isOpenNow = true
+                isOpenNow = true,
+                primaryCategory = MaterialCategory.METAL
+            ),
+            Recycler(
+                id = "recycler_bengaluru_eco",
+                name = "Bengaluru Eco Paper & Raddi Mart",
+                address = "5th Cross, 17th Main, Sector 4, HSR Layout, Bangalore",
+                phone = "+91 94481 23456",
+                whatsappNumber = "+919448123456",
+                contactPerson = "Venkatesh Murthy",
+                latitude = 12.9650,
+                longitude = 77.6010,
+                rating = 4.8f,
+                reviewCount = 248,
+                acceptedMaterials = listOf("newspapers_raddi", "books_white_paper", "cardboard_carton_gutta", "kraft_paper_heavy_brown_bags", "sorted_white_notebooks_ledger"),
+                workingHours = "7:30 AM - 8:00 PM",
+                isVerified = true,
+                distanceKm = 1.4,
+                paymentModes = listOf("Instant UPI", "Cash"),
+                minPickupKg = 5.0,
+                facilityType = "Doorstep Pickup Van • Daily Spot Payout",
+                isOpenNow = true,
+                primaryCategory = MaterialCategory.PAPER
             ),
             Recycler(
                 id = "recycler_metro_ewaste",
@@ -322,14 +315,36 @@ class KabadiwalaRepositoryImpl : KabadiwalaRepository {
                 longitude = 77.6150,
                 rating = 4.8f,
                 reviewCount = 312,
-                acceptedMaterials = listOf("used_smartphone_pcbs", "laptop_motherboard_green_boards", "mixed_circuit_boards", "monitors_heavy_appliance"),
+                acceptedMaterials = listOf("mixed_circuit_boards", "laptop_motherboard_green_boards", "used_smartphone_mobile_pcbs", "power_supplies_transformers", "small_home_appliances", "monitors_heavy_appliance_scrap"),
                 workingHours = "9:30 AM - 6:30 PM",
                 isVerified = true,
                 distanceKm = 3.6,
                 paymentModes = listOf("Instant UPI", "NEFT / RTGS"),
                 minPickupKg = 2.0,
                 facilityType = "Govt Authorized E-Waste Facility • Green Certificate",
-                isOpenNow = true
+                isOpenNow = true,
+                primaryCategory = MaterialCategory.ELECTRONICS
+            ),
+            Recycler(
+                id = "recycler_delhi_ncr_battery",
+                name = "EcoTron Battery & High-Tech E-Waste Hub",
+                address = "B-12, Phase II Industrial Area, Bangalore / NCR",
+                phone = "+91 98991 87654",
+                whatsappNumber = "+919899187654",
+                contactPerson = "Imran Khan & Sons",
+                latitude = 12.9820,
+                longitude = 77.6100,
+                rating = 4.7f,
+                reviewCount = 165,
+                acceptedMaterials = listOf("lead_batteries_inverter_vehicle", "lithium_ion_batteries", "lead_battery_plates", "power_supplies_transformers"),
+                workingHours = "9:00 AM - 7:30 PM",
+                isVerified = true,
+                distanceKm = 2.1,
+                paymentModes = listOf("Immediate Bank Transfer", "UPI", "Cash"),
+                minPickupKg = 10.0,
+                facilityType = "Certified Battery Smelting & E-Waste Recovery",
+                isOpenNow = true,
+                primaryCategory = MaterialCategory.ELECTRONICS
             ),
             Recycler(
                 id = "recycler_balaji_plastics",
@@ -342,14 +357,57 @@ class KabadiwalaRepositoryImpl : KabadiwalaRepository {
                 longitude = 77.5750,
                 rating = 4.6f,
                 reviewCount = 98,
-                acceptedMaterials = listOf("hdpe_containers", "pp_plastics", "ldpe_milk_pouch_film", "hard_plastics_buckets_crates", "pet_bottles_water_soda"),
+                acceptedMaterials = listOf("pet_bottles_water_soda", "hard_plastics_buckets_crates", "hdpe_containers_shampoo_detergent", "pp_plastics_furniture_tubs", "soft_plastics_polyethylene_film", "ldpe_milk_pouch_film_clean"),
                 workingHours = "8:30 AM - 7:00 PM",
                 isVerified = true,
                 distanceKm = 4.2,
                 paymentModes = listOf("Instant UPI", "Cash"),
                 minPickupKg = 20.0,
                 facilityType = "Hydraulic Baling Yard • Bulk Purchases",
-                isOpenNow = true
+                isOpenNow = true,
+                primaryCategory = MaterialCategory.PLASTIC
+            ),
+            Recycler(
+                id = "recycler_prism_glass",
+                name = "Prism Glass Works & Cullet Depot",
+                address = "Plot 14, Glass Factory Road, Peenya 1st Stage, Bangalore",
+                phone = "+91 98455 11223",
+                whatsappNumber = "+919845511223",
+                contactPerson = "Suresh Hegde",
+                latitude = 12.9710,
+                longitude = 77.5890,
+                rating = 4.7f,
+                reviewCount = 114,
+                acceptedMaterials = listOf("broken_glass_ceramics"),
+                workingHours = "9:00 AM - 6:30 PM",
+                isVerified = true,
+                distanceKm = 1.8,
+                paymentModes = listOf("Instant UPI", "Cash"),
+                minPickupKg = 15.0,
+                facilityType = "Govt Certified Cullet & Glass Bottle Processing Center",
+                isOpenNow = true,
+                primaryCategory = MaterialCategory.GLASS
+            ),
+            Recycler(
+                id = "recycler_vardhman_textile",
+                name = "Vardhman Textile & Garment Upcyclers",
+                address = "Shop 45, Weaver's Colony, Commercial Street Area, Bangalore",
+                phone = "+91 97420 33445",
+                whatsappNumber = "+919742033445",
+                contactPerson = "Rajinder Vardhman",
+                latitude = 12.9680,
+                longitude = 77.6080,
+                rating = 4.6f,
+                reviewCount = 76,
+                acceptedMaterials = listOf("old_clothes_textiles"),
+                workingHours = "9:30 AM - 7:30 PM",
+                isVerified = true,
+                distanceKm = 2.3,
+                paymentModes = listOf("Instant UPI", "Cash"),
+                minPickupKg = 10.0,
+                facilityType = "Textile Shredding & Fibre Reclamation Depot",
+                isOpenNow = true,
+                primaryCategory = MaterialCategory.TEXTILE
             ),
             Recycler(
                 id = "recycler_royal_tyres",
@@ -369,7 +427,29 @@ class KabadiwalaRepositoryImpl : KabadiwalaRepository {
                 paymentModes = listOf("Cash", "IMPS"),
                 minPickupKg = 50.0,
                 facilityType = "Industrial Rubber Processing Center",
-                isOpenNow = true
+                isOpenNow = true,
+                primaryCategory = MaterialCategory.RUBBER
+            ),
+            Recycler(
+                id = "recycler_cleancity_packaging",
+                name = "CleanCity Multi-Packaging & Refuse Processing",
+                address = "Gate 6, Solid Waste Management Yard, Whitefield, Bangalore",
+                phone = "+91 96112 55667",
+                whatsappNumber = "+919611255667",
+                contactPerson = "Kavita Reddy",
+                latitude = 12.9590,
+                longitude = 77.6200,
+                rating = 4.5f,
+                reviewCount = 58,
+                acceptedMaterials = listOf("multi_layered_packaging", "composite_packaging_tetra_pak"),
+                workingHours = "8:00 AM - 6:00 PM",
+                isVerified = true,
+                distanceKm = 3.1,
+                paymentModes = listOf("Instant UPI", "Cash"),
+                minPickupKg = 25.0,
+                facilityType = "Authorized Multi-Layer & Refuse Derived Fuel Depot",
+                isOpenNow = true,
+                primaryCategory = MaterialCategory.OTHER
             )
         )
     }
@@ -421,7 +501,7 @@ class KabadiwalaRepositoryImpl : KabadiwalaRepository {
                 receiptNumber = "KC-REC-2026-8942",
                 transactionDate = Instant.now().minusSeconds(18000),
                 recyclerId = "recycler_delhi_ncr_battery",
-                recyclerName = "NCR Battery & Heavy Loha Hub",
+                recyclerName = "EcoTron Battery & High-Tech E-Waste Hub",
                 items = listOf(
                     TransactionItem(
                         materialId = "lead_batteries_inverter_vehicle",
@@ -431,15 +511,15 @@ class KabadiwalaRepositoryImpl : KabadiwalaRepository {
                         amount = 4080.0
                     ),
                     TransactionItem(
-                        materialId = "heavy_copper_cable_scrap",
-                        materialName = "Heavy Copper Cable Scrap",
+                        materialId = "lithium_ion_batteries",
+                        materialName = "Lithium-ion Batteries (Phone/Laptop)",
                         weightKg = 15.0,
-                        pricePerKg = 600.0,
-                        amount = 9000.0
+                        pricePerKg = 65.0,
+                        amount = 975.0
                     )
                 ),
                 totalWeight = 63.0,
-                totalAmount = 13080.0,
+                totalAmount = 5055.0,
                 status = TransactionStatus.CONFIRMED,
                 otp = "5829",
                 handoverConfirmed = false,
@@ -455,7 +535,7 @@ class KabadiwalaRepositoryImpl : KabadiwalaRepository {
                 receiptNumber = "KC-REC-2026-8943",
                 transactionDate = Instant.now().minusSeconds(43200),
                 recyclerId = "recycler_bengaluru_eco",
-                recyclerName = "Bengaluru Eco Scrap & Raddi Mart",
+                recyclerName = "Bengaluru Eco Paper & Raddi Mart",
                 items = listOf(
                     TransactionItem(
                         materialId = "newspapers_raddi",
@@ -472,15 +552,15 @@ class KabadiwalaRepositoryImpl : KabadiwalaRepository {
                         amount = 360.0
                     ),
                     TransactionItem(
-                        materialId = "pet_bottles_water_soda",
-                        materialName = "PET Bottles (Water/Soda)",
+                        materialId = "books_white_paper",
+                        materialName = "Books / White Paper",
                         weightKg = 18.0,
-                        pricePerKg = 15.0,
-                        amount = 270.0
+                        pricePerKg = 12.0,
+                        amount = 216.0
                     )
                 ),
                 totalWeight = 98.0,
-                totalAmount = 1120.0,
+                totalAmount = 1066.0,
                 status = TransactionStatus.PENDING,
                 otp = "3194",
                 handoverConfirmed = false,

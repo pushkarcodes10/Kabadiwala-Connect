@@ -17,7 +17,7 @@ interface KabadiwalaRepository {
 
     // Recyclers
     val nearbyRecyclers: StateFlow<List<Recycler>>
-    suspend fun searchRecyclers(query: String, lat: Double, lng: Double, radiusKm: Double): Result<RecyclerSearchResult>
+    suspend fun searchRecyclers(query: String, lat: Double, lng: Double, radiusKm: Double, category: MaterialCategory? = null): Result<RecyclerSearchResult>
     suspend fun getRecycler(id: String): Result<Recycler?>
 
     // Transactions

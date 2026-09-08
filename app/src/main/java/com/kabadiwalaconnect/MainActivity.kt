@@ -136,6 +136,22 @@ fun AppNavHost(
             )
         }
 
+        composable(
+            route = Screen.RecyclerDiscoveryWithCategory.route,
+            arguments = listOf(androidx.navigation.navArgument("category") {
+                type = androidx.navigation.NavType.StringType
+                defaultValue = ""
+            })
+        ) { backStackEntry ->
+            val catStr = backStackEntry.arguments?.getString("category") ?: ""
+            val cat = catStr.ifEmpty { null }?.let { runCatching { com.kabadiwalaconnect.data.model.MaterialCategory.valueOf(it) }.getOrNull() }
+            RecyclerDiscoveryScreen(
+                onNavigate = { screen -> navController.navigate(screen.route) },
+                languageViewModel = languageViewModel,
+                initialCategory = cat
+            )
+        }
+
         composable(route = Screen.Transaction.route) {
             TransactionScreen(
                 onNavigate = { screen -> navController.navigate(screen.route) },

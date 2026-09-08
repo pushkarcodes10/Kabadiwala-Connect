@@ -24,6 +24,13 @@ sealed class Screen(val route: String) {
     }
 
     @Serializable
+    data class RecyclerDiscoveryWithCategory(val category: String) : Screen("recycler_discovery?category=$category") {
+        companion object {
+            const val route = "recycler_discovery?category={category}"
+        }
+    }
+
+    @Serializable
     data class TransactionDetail(val transactionId: String) : Screen("transaction/$transactionId") {
         companion object {
             const val route = "transaction/{transactionId}"
